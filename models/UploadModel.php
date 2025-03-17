@@ -2,7 +2,6 @@
 class UploadModel {
     protected $uploadDir;
     protected $maxSize = 2097152; // 2 MB
-    protected $isTest = false;
 
     public function __construct($uploadDir = "uploads/", $isTest = false) {
         $this->uploadDir = $uploadDir;
@@ -42,5 +41,16 @@ class UploadModel {
         }
 
         return $fileName;
+    }
+
+    public function saveApplication($data) {
+        // Validate required fields
+        if (empty($data['name']) || empty($data['email'])) {
+            throw new Exception("Nom et email sont requis");
+        }
+
+        // You might want to store this in a database later
+        // For now, we'll just return true to indicate success
+        return true;
     }
 }
